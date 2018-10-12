@@ -4,13 +4,14 @@
   "description": "Restful API with OAuth2 auth protocol for consuming Google Calendar service",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r dotenv/config app.js"
   },
   "author": "David Lares <david.e.lares@gmail.com> (https://twitter.com/davidares3)",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-session": "^2.0.0-beta.3",
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "moment": "^2.22.2",
     "passport": "^0.4.0",
