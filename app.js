@@ -2,6 +2,7 @@ require('dotenv').config
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const cookieSession = require('cookie-session')
 const app = express();
 const port = 3000;
 
@@ -9,6 +10,11 @@ const port = 3000;
 app.set('view engine','pug');
 // static file
 app.use('/',express.static('static'))
+
+// cookies
+app.use(cookieSession({
+  keys: ['myrandomkey123','321yekmodnarym']
+}));
 
 // passport service initialize
 app.use(passport.initialize());
@@ -40,7 +46,11 @@ passport.deserializeUser(function(user,done){
 
 // api endpoints
 app.get('/', (req,res) => {
-  res.render('index');
+  if(isLoggedIn(req)){
+    res.render('home');
+  }else{
+    res.render('index');
+  }
 });
 
 // authenticating with google
@@ -49,6 +59,16 @@ app.post('/login', passport.authenticate('google', {
   scope: ['profile','https://www.googleapis.com/auth/calendar',
          'https://www.googleapis.com/auth/userinfo.email']
 }));
+
+app.get('/oauth/google/callback', passport.authenticate('google', {failureRedirect: '/'}),
+function(req,res){
+    // at this point, I'm authenticated
+    res.redirect('/');
+});
+
+function isLoggedIn(req){
+  return typeof req.session.passport !== "undefined" && req.session.passport.user;
+}
 
 app.listen(3000, () => {
   console.log(`Listening on ${port}`);
