@@ -7,4 +7,5 @@ html
         div.col-md-12
           h3 LoggedIn
           br
-          
+          form.form-inline(action="/logout" method="POST")
+            input(type="submit" value="Log out" class="btn btn-success")

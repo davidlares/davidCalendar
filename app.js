@@ -66,6 +66,13 @@ function(req,res){
     res.redirect('/');
 });
 
+app.post('/logout', (req,res) =>{
+  if(isLoggedIn(req)){
+    req.session.passport.user = null;
+  }
+  res.redirect('/');
+});
+
 function isLoggedIn(req){
   return typeof req.session.passport !== "undefined" && req.session.passport.user;
 }
