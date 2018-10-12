@@ -2,8 +2,10 @@ require('dotenv').config
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const cookieSession = require('cookie-session')
+const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 const Event = require('./calendar');
+const moment = require('moment');
 const app = express();
 const port = 3000;
 
@@ -16,6 +18,10 @@ app.use('/',express.static('static'))
 app.use(cookieSession({
   keys: ['myrandomkey123','321yekmodnarym']
 }));
+
+// bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // passport service initialize
 app.use(passport.initialize());
@@ -48,12 +54,12 @@ passport.deserializeUser(function(user,done){
 // api endpoints
 app.get('/', (req,res) => {
   if(isLoggedIn(req)){
-    // res.render('home');
+    res.render('home');
     // request all calendar events
-    var event =  new Event(req.session.passport.user.accessToken)
-    event.all(function(data){
-      res.send(data);
-    });
+    // var event =  new Event(req.session.passport.user.accessToken)
+    // event.all(function(data){
+    //   res.send(data);
+    // });
   }else{
     res.render('index');
   }
@@ -72,12 +78,31 @@ function(req,res){
     res.redirect('/');
 });
 
-app.post('/logout', (req,res) =>{
+app.post('/events', (req,res) => {
+  var eventOptions = {
+    "summary": req.body.summary,
+    "description": req.body.description,
+    "start": {
+      "dateTime": moment(req.body.start).toISOString()
+    },
+    "end": {
+      "dateTime": moment(req.body.end).toISOString()
+    }
+  }
+  var event =  new Event(req.session.passport.user.accessToken)
+  event.create(eventOptions,function(data){
+    // res.send(data);
+    res.render("event", {event: data});
+  });
+});
+
+app.post('/logout', (req,res) => {
   if(isLoggedIn(req)){
     req.session.passport.user = null;
   }
   res.redirect('/');
 });
+
 
 function isLoggedIn(req){
   return typeof req.session.passport !== "undefined" && req.session.passport.user;

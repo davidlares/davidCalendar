@@ -9,3 +9,21 @@ html
           br
           form.form-inline(action="/logout" method="POST")
             input(type="submit" value="Log out" class="btn btn-success")
+    div.container
+      form(action="/events" method="POST")
+        label Summary
+        input(type="text" name="summary" placeholder="Event Summary" class="form-control")
+        label Description
+        textarea(name="description" placeholder="Event Details" class="form-control")
+        div
+          label Starts
+          input(type="datetime-local" class="form-control" name="start")
+        div
+          label Ends
+          input(type="datetime-local" class="form-control" name="end")
+        
+        div.text-center
+          br
+          input(type="submit" class="btn btn-danger")
+          
+                    

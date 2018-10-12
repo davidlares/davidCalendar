@@ -1,0 +1,13 @@
+html
+  head
+    link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+  body
+    div.container
+      div.row
+        div.text-right
+          strong= event.id
+        h1= event.summary
+        div= event.description
+        pre=JSON.stringify(event)
+            
+          
