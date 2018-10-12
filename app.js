@@ -3,6 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cookieSession = require('cookie-session')
+const Event = require('./calendar');
 const app = express();
 const port = 3000;
 
@@ -47,7 +48,12 @@ passport.deserializeUser(function(user,done){
 // api endpoints
 app.get('/', (req,res) => {
   if(isLoggedIn(req)){
-    res.render('home');
+    // res.render('home');
+    // request all calendar events
+    var event =  new Event(req.session.passport.user.accessToken)
+    event.all(function(data){
+      res.send(data);
+    });
   }else{
     res.render('index');
   }
