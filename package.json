@@ -1,0 +1,21 @@
+{
+  "name": "davidcalendar",
+  "version": "1.0.0",
+  "description": "Restful API with OAuth2 auth protocol for consuming Google Calendar service",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Lares <david.e.lares@gmail.com> (https://twitter.com/davidares3)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.4",
+    "moment": "^2.22.2",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "pug": "^2.0.3",
+    "restler": "^3.4.0"
+  }
+}
