@@ -1,11 +1,22 @@
 html
   head
-    link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
   body
+    nav
+      .nav-wrapper(class="grey darken-1")
+        a.brand-logo(href='#' class="brand-logo center") davidCalendar
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='#') Nothing here
+          
     div.container
       div.row
-        div.col-md-12
+        div.col.s12
           h3 Welcome to davidCalendar
+          p a Node.JS web API to create events on Google Calendar
           br
           form.form-inline(action="/login" method="POST")
-            input(type="submit" value="Log in with Google" class="btn btn-success")
+            input(type="submit" value="Log in with Google" class="btn grey darken-3")
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")

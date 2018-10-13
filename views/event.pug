@@ -1,13 +1,21 @@
 html
   head
-    link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
   body
+    nav
+      .nav-wrapper(class="grey darken-1")
+        a.brand-logo(href='#' class="brand-logo center") davidCalendar
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='#') Nothing here
+            
     div.container
       div.row
-        div.text-right
-          strong= event.id
-        h1= event.summary
-        div= event.description
-        pre=JSON.stringify(event)
+        div.col.s12
+            h1= event.summary
+            div
+              p= event.description
+              strong= event.id
             
           

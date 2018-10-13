@@ -1,29 +1,38 @@
 html
   head
-    link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
   body
+    nav
+      .nav-wrapper(class="grey darken-1")
+        a.brand-logo(href='#' class="brand-logo center") davidCalendar
+        ul#nav-mobile.right.hide-on-med-and-down
+          li
+            a(href='#') Nothing here
+          
     div.container
       div.row
-        div.col-md-12
-          h3 LoggedIn
+        div.col.s12
+          h4 Welcome to davidCalendar
           br
           form.form-inline(action="/logout" method="POST")
-            input(type="submit" value="Log out" class="btn btn-success")
+            input(type="submit" value="Log out" class="btn grey darken-3")
     div.container
-      form(action="/events" method="POST")
-        label Summary
-        input(type="text" name="summary" placeholder="Event Summary" class="form-control")
-        label Description
-        textarea(name="description" placeholder="Event Details" class="form-control")
-        div
-          label Starts
-          input(type="datetime-local" class="form-control" name="start")
-        div
-          label Ends
-          input(type="datetime-local" class="form-control" name="end")
-        
-        div.text-center
-          br
-          input(type="submit" class="btn btn-danger")
+      div.row
+        div.col.s12
+          form(action="/events" method="POST")
+            div(class="input-field col s12")
+              input(type="text" name="summary" class="activate" placeholder="Event")
+            div(class="input-field col s12")
+              textarea(name="description" placeholder="Description" class="activate materialize-textarea")
+            div(class="input-field col s12")
+              p Starts
+              input(type="datetime-local" class="activate" name="start")
+            div(class="input-field col s12")
+              p Ends
+              input(type="datetime-local" class="activate" name="end")
+            div.text-center
+              br
+              input(type="submit" class="btn grey darken-3")
           
                     
